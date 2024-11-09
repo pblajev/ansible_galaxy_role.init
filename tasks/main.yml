@@ -1,0 +1,25 @@
+---
+- block:
+    - name: useradd u_ansible
+      user:
+        name: u_ansible
+        comment: "User Ansible"
+        password: "!"
+        update_password: on_create
+        shell: /bin/bash
+        state: present
+
+    - name: ADD SSH keys
+      authorized_key:
+        user: "u_ansible"
+        key: "{{ lookup('file', '../sshkeys/' + item.name + '.keys') }}"
+      with_items: "{{ users_keys }}"
+      when: not ansible_check_mode
+
+    - name: Install sudoers for u_ansible
+      copy:
+        src: files/sudoers-u_ansible
+        dest: /etc/sudoers.d/sudoers-u_ansible
+        mode: 0440
+        owner: root
+        group: root

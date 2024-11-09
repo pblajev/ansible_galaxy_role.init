@@ -1,0 +1,3 @@
+# Allow u_ansible to run all commands
+u_ansible  ALL=(ALL)  NOPASSWD: ALL
+
