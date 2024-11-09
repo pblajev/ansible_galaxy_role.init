@@ -1,0 +1,5 @@
+# List of accounts that can login as u_ansible user
+users_ansible:
+    - name: user1
+    - name: user2
+    - name: user3
